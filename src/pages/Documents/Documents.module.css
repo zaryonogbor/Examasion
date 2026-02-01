@@ -163,6 +163,11 @@
     font-weight: 500;
 }
 
+.actionButtons {
+    display: flex;
+    gap: 1rem;
+}
+
 .summarySection {
     background: var(--surface);
     padding: 3rem;
@@ -261,5 +266,14 @@
 
     .fileMeta {
         justify-content: center;
+    }
+
+    .actionButtons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .actionButtons>button {
+        width: 100%;
     }
 }

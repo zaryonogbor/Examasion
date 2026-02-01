@@ -17,7 +17,7 @@ export const DocumentDetail = () => {
                         <span>Type: PDF</span>
                     </div>
                 </div>
-                <div style={{ display: 'flex', gap: '1rem' }}>
+                <div className={styles.actionButtons}>
                     <Button variant="outline" onClick={() => navigate('/chat')} leftIcon={<MessageSquare size={18} />}>
                         Chat with Doc
                     </Button>
