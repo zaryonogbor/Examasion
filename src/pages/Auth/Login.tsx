@@ -20,7 +20,7 @@ export const Login = () => {
     };
 
     return (
-        <div className={styles.authContainer}>
+        <div className={styles.authContainer} data-theme="light">
             <div className={styles.authCard}>
                 <div className={styles.brand}>Examasion</div>
                 <h1 className={styles.title}>Sign In</h1>

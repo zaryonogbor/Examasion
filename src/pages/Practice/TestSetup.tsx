@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UploadCloud, ListChecks, X, CheckCircle2, Circle } from 'lucide-react';
+import { X, CheckCircle2, Circle } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import styles from './Practice.module.css';
@@ -80,7 +80,7 @@ export const TestSetup = () => {
                         onClick={() => setMode('upload')}
                     >
                         <div className={styles.modeIcon}>
-                            <UploadCloud size={32} />
+                            <img src="/assets/3d/3d_cloud_upload.png" alt="Upload" className={styles.modeIllustration} />
                         </div>
                         <div className={styles.modeTitle}>Upload Document</div>
                         <div className={styles.modeDescription}>Generate questions from your study materials (PDF, DOCX)</div>
@@ -92,7 +92,7 @@ export const TestSetup = () => {
                         onClick={() => setMode('topics')}
                     >
                         <div className={styles.modeIcon}>
-                            <ListChecks size={32} />
+                            <img src="/assets/3d/3d_checklist.png" alt="Topics" className={styles.modeIllustration} />
                         </div>
                         <div className={styles.modeTitle}>Course & Topics</div>
                         <div className={styles.modeDescription}>Create a test from a syllabus or list of topics</div>

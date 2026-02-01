@@ -9,35 +9,41 @@ export const TestResults = () => {
     return (
         <div className={styles.resultsContainer}>
             <div className={styles.scoreCard}>
-                <div className={styles.scoreCircle}>
-                    <div className={styles.scoreValue}>80%</div>
-                    <div className={styles.scoreLabel}>Final Score</div>
-                </div>
-                <h2>Fantastic Effort!</h2>
-                <p>You've mastered these concepts. Ready to tackle something new or refine your score?</p>
-                <div style={{ display: 'flex', gap: '1.25rem', marginTop: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    <Button
-                        variant="ghost"
-                        onClick={() => navigate('/dashboard')}
-                        leftIcon={<ArrowLeft size={20} />}
-                        style={{ color: 'white' }}
-                    >
-                        Back to Dashboard
-                    </Button>
-                    <Button
-                        onClick={() => navigate('/practice')}
-                        style={{ background: 'white', color: 'var(--primary)' }}
-                        leftIcon={<RotateCcw size={20} />}
-                    >
-                        Retake Test
-                    </Button>
-                    <Button
-                        onClick={() => navigate('/documents')}
-                        style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: '1px solid rgba(255,255,255,0.4)' }}
-                        rightIcon={<ArrowRight size={20} />}
-                    >
-                        Next Topic
-                    </Button>
+                <div className={styles.scoreCardContent}>
+                    <div className={styles.scoreBox}>
+                        <div className={styles.scoreValue}>80%</div>
+                        <div className={styles.scoreLabel}>Accuracy</div>
+                    </div>
+
+                    <div className={styles.scoreInfo}>
+                        <h2>Performance Summary</h2>
+                        <p>Incredible progress! You've mastered the core concepts of this material. Continue at this pace to guarantee exam success.</p>
+
+                        <div className={styles.scoreActions}>
+                            <Button
+                                variant="ghost"
+                                onClick={() => navigate('/dashboard')}
+                                leftIcon={<ArrowLeft size={18} />}
+                                className={styles.dashboardBtn}
+                            >
+                                Dashboard
+                            </Button>
+                            <Button
+                                onClick={() => navigate('/practice')}
+                                className={styles.retakeBtn}
+                                leftIcon={<RotateCcw size={18} />}
+                            >
+                                Retake session
+                            </Button>
+                            <Button
+                                onClick={() => navigate('/documents')}
+                                className={styles.nextBtn}
+                                rightIcon={<ArrowRight size={18} />}
+                            >
+                                Explore More
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

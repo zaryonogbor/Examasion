@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
-import { Cloud, File, CheckCircle } from 'lucide-react';
+import { File, CheckCircle } from 'lucide-react';
 import styles from './Documents.module.css';
 
 export const DocumentUpload = () => {
@@ -17,7 +17,7 @@ export const DocumentUpload = () => {
             <Card className={styles.uploadCard} padding="lg">
                 <div className={styles.uploadZone}>
                     <div className={styles.uploadIconPulse}>
-                        <Cloud size={40} />
+                        <img src="/assets/3d/3d_cloud_upload.png" alt="Upload" style={{ width: '60px', height: 'auto' }} />
                     </div>
                     <div>
                         <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Drag & drop or click to browse</h3>

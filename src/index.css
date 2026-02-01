@@ -75,6 +75,27 @@
   --primary-glow: rgba(129, 140, 248, 0.3);
 }
 
+/* Explicit light mode override for nesting */
+[data-theme='light'] {
+  --background: #fdfdfd;
+  --surface: #ffffff;
+  --surface-secondary: #f8fafc;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --text-main: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-glow: rgba(99, 102, 241, 0.4);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

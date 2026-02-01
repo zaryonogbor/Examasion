@@ -12,7 +12,7 @@ export const Dashboard = () => {
             <div className={styles.welcomeSection}>
                 <h1>Welcome back, Zaryon!</h1>
                 <p>You've completed 85% of your weekly goal. Keep the momentum going!</p>
-                <img src="/assets/dashboard-icon.png" alt="Dashboard Icon" className={styles.dashboardIcon} />
+                <img src="/assets/3d/3d_hero.png" alt="Dashboard Hero" className={styles.dashboardIcon} />
 
 
                 <div className={styles.quickActions}>
@@ -36,7 +36,7 @@ export const Dashboard = () => {
 
             <div className={styles.statsGrid}>
                 <Card className={`${styles.statCard} ${styles.cardBlue}`} hoverable>
-                    <img src="/assets/books-icon.png" alt="Books" className={`${styles.statIcon} ${styles.blueStatIcon}`} />
+                    <img src="/assets/3d/3d_books.png" alt="Study Materials" className={`${styles.statIcon} ${styles.blueStatIcon}`} />
                     <div className={styles.statCardTitle}>Study Materials</div>
                     <div className={styles.statCardValue}>12</div>
                     <div className={styles.statCardSub}>
@@ -45,7 +45,7 @@ export const Dashboard = () => {
                     </div>
                 </Card>
                 <Card className={`${styles.statCard} ${styles.cardPurple}`} hoverable>
-                    <img src="/assets/target-small-icon.svg" alt="Books" className={`${styles.statIcon} ${styles.purpleStatIcon}`} />
+                    <img src="/assets/3d/3d_trophy.png" alt="Tests Mastering" className={`${styles.statIcon} ${styles.purpleStatIcon}`} />
                     <div className={styles.statCardTitle}>Tests Mastering</div>
                     <div className={styles.statCardValue}>28</div>
                     <div className={styles.statCardSub}>
@@ -53,8 +53,8 @@ export const Dashboard = () => {
                         <span className={styles.trendUp}>+5 this session</span>
                     </div>
                 </Card>
-                <Card className={`${styles.statCard} ${styles.cardOrange}`}  hoverable>
-                    <img src="/assets/computer-icon.svg" alt="Books" className={`${styles.statIcon} ${styles.orangeStatIcon}`} />
+                <Card className={`${styles.statCard} ${styles.cardOrange}`} hoverable>
+                    <img src="/assets/3d/3d_target.png" alt="Knowledge Level" className={`${styles.statIcon} ${styles.orangeStatIcon}`} />
                     <div className={styles.statCardTitle}>Knowledge Level</div>
                     <div className={styles.statCardValue}>84%</div>
                     <div className={styles.statCardSub}>

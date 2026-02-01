@@ -82,6 +82,11 @@
     font-weight: 700 !important;
 }
 
+:global([data-theme='dark']) .uploadBtn,
+:global([data-theme='dark']) .uploadBtn:hover {
+    box-shadow: none !important;
+}
+
 .practiceBtn {
     background: rgba(255, 255, 255, 0.15) !important;
     border: 1px solid rgba(255, 255, 255, 0.3) !important;
@@ -122,21 +127,21 @@
 }
 
 .orangeStatIcon {
-    width: 120px;
-    padding-bottom: 20px;
-    padding-right: 10px;
+    width: 150px;
+    padding-bottom: 10px;
+    padding-right: 5px;
 }
 
 .purpleStatIcon {
-    width: 120px;
-    padding-bottom: 30px;
-    padding-right: 10px;
+    width: 115px;
+    padding-bottom: 10px;
+    padding-right: 20px;
 }
 
 .blueStatIcon {
-    width: 140px;
-    padding-bottom: 15px;
-    padding-right: 10px;
+    width: 120px;
+    padding-bottom: 0px;
+    padding-right: 20px;
 }
 
 .statCard:hover .statIcon {
