@@ -163,32 +163,81 @@ export const CbtTest = () => {
 
     return (
         <div className={styles.testContainer}>
-            <div className={styles.header}>
-                <div>Question {currentQuestionIdx + 1} of {mockQuestions.length}</div>
-                <div className={styles.timer}>{formatTime(timeLeft)}</div>
-            </div>
+            <div className={styles.testLayout}>
+                <div className={styles.mainContent}>
+                    <div className={styles.header}>
+                        <div>Question {currentQuestionIdx + 1} of {mockQuestions.length}</div>
+                        <div className={styles.timer}>{formatTime(timeLeft)}</div>
+                    </div>
 
-            <div className={styles.questionCard}>
-                <div className={styles.questionMeta}>
-                    {getQuestionTypeName(currentQ.type)} • {currentQ.points} Points
+                    <div className={styles.questionCard}>
+                        <div className={styles.questionMeta}>
+                            {getQuestionTypeName(currentQ.type)} • {currentQ.points} Points
+                        </div>
+                        <div className={styles.questionText}>{currentQ.text}</div>
+
+                        {renderQuestionContent()}
+                    </div>
+
+                    <div className={styles.footer}>
+                        <Button
+                            variant="secondary"
+                            disabled={currentQuestionIdx === 0}
+                            onClick={() => setCurrentQuestionIdx(prev => prev - 1)}
+                        >
+                            Previous
+                        </Button>
+                        <div className={styles.navigation}>
+                            <Button onClick={handleNext}>
+                                {currentQuestionIdx === mockQuestions.length - 1 ? 'Submit Test' : 'Next Question'}
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-                <div className={styles.questionText}>{currentQ.text}</div>
 
-                {renderQuestionContent()}
-            </div>
+                <div className={styles.sidebar}>
+                    <div className={styles.sidebarTitle}>Test Navigation</div>
 
-            <div className={styles.footer}>
-                <Button
-                    variant="secondary"
-                    disabled={currentQuestionIdx === 0}
-                    onClick={() => setCurrentQuestionIdx(prev => prev - 1)}
-                >
-                    Previous
-                </Button>
-                <div className={styles.navigation}>
-                    <Button onClick={handleNext}>
-                        {currentQuestionIdx === mockQuestions.length - 1 ? 'Submit Test' : 'Next Question'}
-                    </Button>
+                    <div className={styles.sidebarProgress}>
+                        <div className={styles.progressLabel}>
+                            <span>Progress</span>
+                            <span>{Math.round((Object.keys(answers).length / mockQuestions.length) * 100)}%</span>
+                        </div>
+                        <div className={styles.progressBar}>
+                            <div
+                                className={styles.progressFill}
+                                style={{ width: `${(Object.keys(answers).length / mockQuestions.length) * 100}%` }}
+                            ></div>
+                        </div>
+                    </div>
+
+                    <div className={styles.navGrid}>
+                        {mockQuestions.map((q, idx) => {
+                            const isAnswered = answers[idx] !== undefined && answers[idx] !== '';
+                            const isActive = currentQuestionIdx === idx;
+
+                            return (
+                                <div
+                                    key={q.id}
+                                    className={`${styles.navItem} ${isActive ? styles.navItemActive : ''} ${isAnswered ? styles.navItemAnswered : ''}`}
+                                    onClick={() => setCurrentQuestionIdx(idx)}
+                                >
+                                    {idx + 1}
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <div className={styles.sidebarInfo}>
+                        <div className={styles.infoItem}>
+                            <span className={styles.dotAnswered}></span>
+                            <span>Answered</span>
+                        </div>
+                        <div className={styles.infoItem}>
+                            <span className={styles.dotCurrent}></span>
+                            <span>Current</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

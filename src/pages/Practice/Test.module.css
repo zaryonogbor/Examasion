@@ -1,9 +1,20 @@
 .testContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.testLayout {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+.mainContent {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 120px);
-    max-width: 900px;
-    margin: 0 auto;
+    gap: 2rem;
 }
 
 .header {
@@ -11,7 +22,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    background-color: white;
+    background-color: var(--surface);
     padding: 1rem 1.5rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
@@ -29,7 +40,7 @@
 }
 
 .questionCard {
-    background-color: white;
+    background-color: var(--surface);
     padding: 3rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
@@ -98,6 +109,7 @@
     border-radius: var(--radius-md);
     font-size: 1.1rem;
     font-family: inherit;
+    color: var(--text-main);
     transition: all 0.2s;
     background-color: var(--surface);
 }
@@ -105,7 +117,7 @@
 .textInput:focus {
     outline: none;
     border-color: var(--primary);
-    background-color: white;
+    background-color: var(--surface-secondary);
     box-shadow: 0 0 0 3px var(--primary-light);
 }
 
@@ -117,6 +129,7 @@
     border-radius: var(--radius-md);
     font-size: 1.1rem;
     font-family: inherit;
+    color: var(--text-main);
     line-height: 1.6;
     resize: vertical;
     transition: all 0.2s;
@@ -126,7 +139,7 @@
 .textArea:focus {
     outline: none;
     border-color: var(--primary);
-    background-color: white;
+    background-color: var(--surface-secondary);
     box-shadow: 0 0 0 3px var(--primary-light);
 }
 
@@ -167,11 +180,152 @@
     margin-top: 2rem;
 }
 
+.navigation {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 320px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.sidebarTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.navGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.75rem;
+}
+
+.navItem {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-secondary);
+}
+
+.navItem:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.navItemActive {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+}
+
+.navItemAnswered {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-light);
+}
+
+.sidebarProgress {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.progressLabel {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.progressBar {
+    height: 8px;
+    background: var(--surface);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.sidebarInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.infoItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.dotAnswered,
+.dotCurrent {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dotAnswered {
+    background: var(--primary-light);
+    border: 1px solid var(--primary);
+}
+
+.dotCurrent {
+    background: var(--primary);
+}
+
 /* Mobile breakpoint */
+@media (max-width: 1024px) {
+    .testLayout {
+        flex-direction: column-reverse;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        padding: 1.5rem;
+    }
+
+    .navGrid {
+        grid-template-columns: repeat(10, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .testContainer {
-        height: auto;
-        min-height: calc(100vh - 100px);
+        padding: 1rem;
     }
 
     .header {
@@ -179,34 +333,14 @@
         gap: 0.75rem;
         text-align: center;
         padding: 1rem;
-        margin-bottom: 1rem;
     }
 
-    .timer {
-        font-size: 1.1rem;
+    .navGrid {
+        grid-template-columns: repeat(8, 1fr);
     }
 
     .questionCard {
         padding: 1.5rem;
-    }
-
-    .questionText {
-        font-size: 1.15rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .option {
-        padding: 0.875rem 1rem;
-    }
-
-    .footer {
-        flex-direction: column;
-        gap: 0.75rem;
-        margin-top: 1.5rem;
-    }
-
-    .footer>button {
-        width: 100%;
     }
 }
 

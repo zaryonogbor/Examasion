@@ -1,21 +1,51 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
-import { FileUp, FileText, Calendar, BookOpen, ExternalLink } from 'lucide-react';
+import { FileUp, Trash2, Check } from 'lucide-react';
 import { Input } from '../../components/ui/Input';
 import styles from './Documents.module.css';
 import type { StudyDocument } from '../../types';
 
-// Placeholder data
-const mockDocuments: StudyDocument[] = [
-    { id: '1', userId: 'u1', title: 'Introduction to Psychology.pdf', subject: 'Psychology', fileUrl: '', fileType: 'pdf', uploadDate: '2023-10-15', status: 'ready' },
-    { id: '2', userId: 'u1', title: 'Advanced Calculus Notes.docx', subject: 'Mathematics', fileUrl: '', fileType: 'docx', uploadDate: '2023-10-18', status: 'processing' },
-    { id: '3', userId: 'u1', title: 'Marketing 101 Slides.ppt', subject: 'Business', fileUrl: '', fileType: 'ppt', uploadDate: '2023-10-20', status: 'ready' },
-    { id: '4', userId: 'u1', title: 'Organic Chemistry Lab Report.pdf', subject: 'Chemistry', fileUrl: '', fileType: 'pdf', uploadDate: '2023-10-22', status: 'ready' },
-    { id: '5', userId: 'u1', title: 'Modern History Overview.docx', subject: 'History', fileUrl: '', fileType: 'docx', uploadDate: '2023-10-25', status: 'ready' },
+// Placeholder data extended with size
+const initialDocuments: (StudyDocument & { size: string })[] = [
+    { id: '1', userId: 'u1', title: 'Shopping_list', subject: 'Psychology', fileUrl: '', fileType: 'doc', uploadDate: '12.07.2019', status: 'ready', size: '1 MB' },
+    { id: '2', userId: 'u1', title: 'Design_brief', subject: 'Mathematics', fileUrl: '', fileType: 'doc', uploadDate: '12.07.2019', status: 'ready', size: '150 KB' },
+    { id: '3', userId: 'u1', title: 'Prices', subject: 'Business', fileUrl: '', fileType: 'xls', uploadDate: '12.07.2019', status: 'ready', size: '1 MB' },
+    { id: '4', userId: 'u1', title: '01_project_description', subject: 'Engineering', fileUrl: '', fileType: 'pdf', uploadDate: '12.07.2019', status: 'ready', size: '150 MB' },
+    { id: '5', userId: 'u1', title: '02_project_description', subject: 'Engineering', fileUrl: '', fileType: 'pdf', uploadDate: '12.07.2019', status: 'ready', size: '150 MB' },
 ];
 
 export const DocumentList = () => {
     const navigate = useNavigate();
+    const [documents, setDocuments] = useState(initialDocuments);
+    const [selectedIds, setSelectedIds] = useState<string[]>(['1', '2', '3']);
+
+    const handleRemove = (e: React.MouseEvent, id: string) => {
+        e.stopPropagation();
+        if (window.confirm('Are you sure you want to remove this document?')) {
+            setDocuments(prev => prev.filter(doc => doc.id !== id));
+        }
+    };
+
+    const toggleSelect = (e: React.MouseEvent, id: string) => {
+        e.stopPropagation();
+        setSelectedIds(prev =>
+            prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+        );
+    };
+
+    const getFileTypeClass = (type: string) => {
+        switch (type.toLowerCase()) {
+            case 'pdf': return styles.typePdf;
+            case 'doc':
+            case 'docx': return styles.typeDoc;
+            case 'xls':
+            case 'xlsx': return styles.typeXls;
+            case 'ppt':
+            case 'pptx': return styles.typePpt;
+            default: return styles.typeDoc;
+        }
+    };
 
     return (
         <div className={styles.pageContainer}>
@@ -35,34 +65,40 @@ export const DocumentList = () => {
                 </Button>
             </div>
 
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '-0.5rem' }}>Files</h2>
+
             <div className={styles.documentGrid}>
-                {mockDocuments.map((doc) => (
-                    <div key={doc.id} className={styles.docCard} onClick={() => navigate(`/documents/${doc.id}`)}>
-                        <div className={styles.docHeader}>
-                            <div className={styles.docIconWrapper}>
-                                <FileText size={24} />
-                            </div>
-                            <div>
-                                <h3 className={styles.docTitle}>{doc.title}</h3>
-                                <div className={styles.docSubject}>
-                                    <BookOpen size={12} style={{ marginRight: '4px' }} />
-                                    {doc.subject}
-                                </div>
-                            </div>
+                {documents.map((doc) => (
+                    <div
+                        key={doc.id}
+                        className={styles.docCard}
+                        onClick={() => navigate(`/documents/${doc.id}`)}
+                    >
+                        <div
+                            className={`${styles.cardSelect} ${selectedIds.includes(doc.id) ? styles.cardSelectActive : ''}`}
+                            onClick={(e) => toggleSelect(e, doc.id)}
+                        >
+                            <Check size={12} strokeWidth={3} />
                         </div>
 
-                        <div className={styles.docMeta}>
-                            <div className={styles.docDate}>
-                                <Calendar size={12} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
-                                {doc.uploadDate}
-                            </div>
-                            <span className={`${styles.statusBadge} ${styles[`status${doc.status.charAt(0).toUpperCase() + doc.status.slice(1)}`]}`}>
-                                {doc.status}
-                            </span>
+                        <div
+                            className={styles.cardAction}
+                            onClick={(e) => handleRemove(e, doc.id)}
+                            title="Remove Document"
+                        >
+                            <Trash2 size={18} />
                         </div>
 
-                        <div style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', opacity: 0.3 }}>
-                            <ExternalLink size={16} />
+                        <div className={`${styles.fileIconLarge} ${getFileTypeClass(doc.fileType)}`}>
+                            {doc.fileType.toUpperCase()}
+                        </div>
+
+                        <div className={styles.docInfo}>
+                            <h3 className={styles.docTitle}>{doc.title}</h3>
+                            <div className={styles.docMeta}>
+                                <span>{doc.size}</span>
+                                <span>{doc.uploadDate}</span>
+                            </div>
                         </div>
                     </div>
                 ))}
