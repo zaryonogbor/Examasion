@@ -312,3 +312,82 @@
         width: 100%;
     }
 }
+
+/* Modal Styles */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1.5rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modalCard {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    width: 100%;
+    max-width: 440px;
+    padding: 2.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modalIcon {
+    width: 64px;
+    height: 64px;
+    background: #fee2e2;
+    color: #ef4444;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.modalContent {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.modalTitle {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 0.75rem;
+}
+
+.modalText {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.fileNameHighlight {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.modalActions {
+    display: flex;
+    gap: 1rem;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
-import { FileUp, Trash2, Check } from 'lucide-react';
+import { FileUp, Trash2, Check, AlertTriangle } from 'lucide-react';
 import { Input } from '../../components/ui/Input';
 import styles from './Documents.module.css';
 import type { StudyDocument } from '../../types';
@@ -19,11 +19,17 @@ export const DocumentList = () => {
     const navigate = useNavigate();
     const [documents, setDocuments] = useState(initialDocuments);
     const [selectedIds, setSelectedIds] = useState<string[]>(['1', '2', '3']);
+    const [docToDelete, setDocToDelete] = useState<StudyDocument | null>(null);
 
-    const handleRemove = (e: React.MouseEvent, id: string) => {
+    const handleRemove = (e: React.MouseEvent, doc: StudyDocument) => {
         e.stopPropagation();
-        if (window.confirm('Are you sure you want to remove this document?')) {
-            setDocuments(prev => prev.filter(doc => doc.id !== id));
+        setDocToDelete(doc);
+    };
+
+    const handleConfirmDelete = () => {
+        if (docToDelete) {
+            setDocuments(prev => prev.filter(doc => doc.id !== docToDelete.id));
+            setDocToDelete(null);
         }
     };
 
@@ -83,7 +89,7 @@ export const DocumentList = () => {
 
                         <div
                             className={styles.cardAction}
-                            onClick={(e) => handleRemove(e, doc.id)}
+                            onClick={(e) => handleRemove(e, doc)}
                             title="Remove Document"
                         >
                             <Trash2 size={18} />
@@ -103,6 +109,40 @@ export const DocumentList = () => {
                     </div>
                 ))}
             </div>
+
+            {/* Premium Delete Confirmation Modal */}
+            {docToDelete && (
+                <div className={styles.modalOverlay} onClick={() => setDocToDelete(null)}>
+                    <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
+                        <div className={styles.modalIcon}>
+                            <AlertTriangle size={32} />
+                        </div>
+                        <div className={styles.modalContent}>
+                            <h3 className={styles.modalTitle}>Delete Document?</h3>
+                            <p className={styles.modalText}>
+                                Are you sure you want to delete this document? This action cannot be undone.
+                                <span className={styles.fileNameHighlight}>{docToDelete.title}</span>
+                            </p>
+                        </div>
+                        <div className={styles.modalActions}>
+                            <Button
+                                variant="secondary"
+                                fullWidth
+                                onClick={() => setDocToDelete(null)}
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                variant="danger"
+                                fullWidth
+                                onClick={handleConfirmDelete}
+                            >
+                                Delete
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
